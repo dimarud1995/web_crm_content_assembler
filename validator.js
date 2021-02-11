@@ -80,6 +80,14 @@ function syntaxValidator(text_string,part){
   
       var t18=text_string.match(/<\/a>/g);
       var ammount_of_a_close=t18==null?0:t18.length;
+
+      // var t19=text_string.match(/</g);
+      // var ammount_of_tag_open=t17==null?0:t19.length;
+  
+      // var t20=text_string.match(/>/g);
+      // var ammount_of_tag_close=t18==null?0:t20.length;
+      // console.log(t19)
+      // console.log(t20)
     /////////////////////////////
     /////////////////////////////
     /////////////////////////////
@@ -103,6 +111,10 @@ function syntaxValidator(text_string,part){
         console.log('\x1b[31m%s\x1b[0m',"Є помилки в синтаксисі "+part+"! -->  a ");
         isValid=false;
       }
+      // if(ammount_of_tag_open!==ammount_of_tag_close){
+      //   console.log('\x1b[31m%s\x1b[0m',"Є помилки в синтаксисі "+part+"! -->  <> ");
+      //   isValid=false;
+      // }
         if(isValid){
         console.log("\x1b[32m%s\x1b[0m","Синтаксис перевірено!")
         }

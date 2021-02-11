@@ -8,6 +8,7 @@ const IMG="img\\";
 const RELEASE="release\\";
 const  {syntaxValidator} = require("./validator.js");
 const {copyFiles, readTextFile} = require("./files.js");
+const {detectLinks} = require("./linker.js");
 
 main();
 
@@ -26,28 +27,42 @@ function main(){
   //console.log("res_p = "+ res_p);
 
     var temp_index =readTextFile(res_p+INDEX);
-
+    if(temp_index==null){
+      return false;
+    }
+   var links= detectLinks(res_p,INDEX);
+console.log(links);
     var temp_style=""
-    if(fs.existsSync(res_p+STYLES)){
-      var style_files = fs.readdirSync(res_p+STYLES);
-      for(var i=0; i<style_files.length;i++){
-        temp_style +="<style>\n"+readTextFile(res_p+STYLES+style_files[i])+"\n</style>\n";
-      }
-   }
     var temp_script =""
-    if(fs.existsSync(res_p+SCRIPTS)){
-      var script_files=fs.readdirSync(res_p+SCRIPTS);
-      for(var i=0; i<script_files.length;i++){
-        temp_script +="<script>\n"+readTextFile(res_p+SCRIPTS)+"\n</script>\n";
-      }
-    }
 
-   if(fs.existsSync(res_p+JS)){
-      var script_files=fs.readdirSync(res_p+JS);
-      for(var i=0; i<script_files.length;i++){
-        temp_script +="<script>\n"+readTextFile(res_p+JS)+"\n</script>\n";
+ 
+    for(i=0; i<links.length;i++){
+      if(links[i].includes('.css')){
+        temp_style +="<style>\n"+readTextFile(links[i])+"\n</style>\n";
+      }
+      if(links[i].includes('.js')){
+        temp_script +="<script>\n"+readTextFile(links[i])+"\n</script>\n";
       }
     }
+     //   if(fs.existsSync(res_p+STYLES)){
+  //     var style_files = fs.readdirSync(res_p+STYLES);
+  //     for(var i=0; i<style_files.length;i++){
+  //       temp_style +="<style>\n"+readTextFile(res_p+STYLES+style_files[i])+"\n</style>\n";
+  //     }
+  //  }
+    // if(fs.existsSync(res_p+SCRIPTS)){
+    //   var script_files=fs.readdirSync(res_p+SCRIPTS);
+    //   for(var i=0; i<script_files.length;i++){
+    //     temp_script +="<script>\n"+readTextFile(res_p+SCRIPTS)+"\n</script>\n";
+    //   }
+    // }
+
+  //  if(fs.existsSync(res_p+JS)){
+  //     var script_files=fs.readdirSync(res_p+JS);
+  //     for(var i=0; i<script_files.length;i++){
+  //       temp_script +="<script>\n"+readTextFile(res_p+JS)+"\n</script>\n";
+  //     }
+  //   }
 
     var index_header=temp_index.match(/(?<=<head>)([\s\S]*)(?=<\/head>)/g)[0];
     //  var regex_index_header = new RegExp("/(<link)([\s\S]*)(" + p + "css\/style\.css[\"\']>[\n\r]*)/g");

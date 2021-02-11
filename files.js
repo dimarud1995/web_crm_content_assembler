@@ -1,4 +1,6 @@
 const fs = require("fs");
+const fse= require("fs-extra");
+const path=require("path");
 
 //copy files from dir to new dir
 function copyFiles(path_from,path_to){
@@ -48,7 +50,7 @@ function copyFiles(path_from,path_to){
       console.error('\x1b[31m%s\x1b[0m',"Не зчитано "+file);
     //   console.log('\x1b[31m',"ERROR! "+file);
     // console.error(e);
-      return "";
+      return null;
   }
    // асинхронное чтение
 // fs.readFile(file, "utf8", 
