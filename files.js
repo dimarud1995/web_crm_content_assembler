@@ -42,7 +42,11 @@ function copyFiles(path_from,path_to){
   try{
     let fileContent = fs.readFileSync(file, "utf8");
    // console.log(fileContent);
-   console.log("Зчитано "+ file)
+   if(fileContent==""){
+   console.log("Порожній файл "+file);
+   }else{
+   console.log("Зчитано "+ file);
+   }
     return fileContent;
 
   }catch(e)

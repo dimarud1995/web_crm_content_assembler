@@ -1,0 +1,30 @@
+{
+  "name": "release-builder",
+  "version": "0.0.3",
+  "description": "release builder",
+  "main": "build.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "fs": "^0.0.1-security",
+    "fs-extra": "^9.1.0",
+    "path": "^0.12.7",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimarud1995/web_crm_content_assembler.git"
+  },
+  "keywords": [
+    "release",
+    "builder"
+  ],
+  "author": "rud dmytro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dimarud1995/web_crm_content_assembler/issues"
+  },
+  "homepage": "https://github.com/dimarud1995/web_crm_content_assembler#readme"
+}

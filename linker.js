@@ -1,7 +1,7 @@
 const fs = require("fs");
 const fse= require("fs-extra");
 const path=require("path");
-const {copyFiles, readTextFile} = require("./files.js");
+const {readTextFile} = require("./files.js");
 
 
 function detectLinks(path,file){
@@ -12,21 +12,26 @@ function detectLinks(path,file){
 //console.log(text.length);
 var links=[];
 try{
-    links=text.match(/(<link)([^>]*)(>)/g).map(item=>{
+    links_1=text.match(/(<link)([^>]*)(>)/g);
+    if(links_1){
+   links= links_1.map(item=>{
         return item.match(/(?<=href=")([\s\S]*)(?=")/g);
         })
+    }
 }catch(e){
     console.log(e);
 }
 
 try{
-var t=text.match(/(<script)([^>]*)(>)/g).map(item=>{
+    scripts_1=text.match(/(<script)([^>]*)(>)/g);
+    if(scripts_1){
+    scripts=scripts_1.map(item=>{
         return item.match(/(?<=src=")([\s\S]*)(?=")/g);
         })
-        console.log(t)
-        for(i=0;i<t.length;t++){
-            links.push(t[i])
+        for(i=0;i<scripts.length;i++){
+            links.push(scripts[i])
         }
+    }
 
 }catch(e)
 {
@@ -35,9 +40,9 @@ var t=text.match(/(<script)([^>]*)(>)/g).map(item=>{
 console.log(links);
 return links.map(item=>{
      var n= item[0].match(/\.\.\//g);
-     console.log(item[0])
+    // console.log(item[0])
      temp_item=item[0].replace(/\.\.\//g,"").replace(/\.\//g,"").replace(/\/\.\.\//g,"/").replace(/\//g,"\\");
-     console.log(temp_item)
+    // console.log(temp_item)
      temp_path=path.split("\\");
      res_path=""
      res_n=0;
