@@ -11,8 +11,7 @@
     "rimraf": "^3.0.2"
   },
   "devDependencies": {},
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dimarud1995/web_crm_content_assembler.git"
