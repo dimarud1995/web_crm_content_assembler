@@ -34,20 +34,22 @@ function main(){
       return false;
     }
    var links= detectLinks(res_p,INDEX);
-console.log(links);
+
     var temp_style=""
     var temp_script =""
     for(i=0; i<links.length;i++){
-      if(links[i].includes('.css')){
-        temp=readTextFile(links[i]);
-        if(temp||temp!==""){
-        temp_style +="<style>\n"+temp+"\n</style>\n";
+      if(!links[i].includes("http:")&&!links[i].includes("https:")){
+        if(links[i].includes('.css')){
+          temp=readTextFile(links[i]);
+          if(temp||temp!==""){
+          temp_style +="<style>\n"+temp+"\n</style>\n";
+          }
         }
-      }
-      if(links[i].includes('.js')){
-        temp=readTextFile(links[i]);
-        if(temp||temp!==""){
-          temp_script +="<script>\n"+temp+"\n</script>\n";
+        if(links[i].includes('.js')){
+          temp=readTextFile(links[i]);
+          if(temp||temp!==""){
+            temp_script +="<script>\n"+temp+"\n</script>\n";
+          }
         }
       }
     }
@@ -78,7 +80,8 @@ console.log(links);
     // index_header=index_header.replace(regex_index_header,"");
     index_header=index_header.replace("<link rel=\"stylesheet\" href=\"./css/style.css\">","")
                              .replace("<script src=\"./js/script.js\"></script>","");
-    var index_body=temp_index.match(/(<body>)([\s\S]*)(?=<\/body>)/g)[0]+time+"\n</body>"
+    var index_body=temp_index.match(/(<body>)([\s\S]*)(?=<\/body>)/g)[0]+time+"\n</body>";
+    index_body=index_body.replace("<script src=\"./js/script.js\"></script>","");
     index_header+=temp_style+temp_script;
     syntaxValidator(index_header,"brackets");
     syntaxValidator(index_body,"tags");

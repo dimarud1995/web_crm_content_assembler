@@ -37,22 +37,34 @@ try{
 {
     console.log(e);
 }
-console.log(links);
-return links.map(item=>{
+
+// console.log(links);
+ var res_links=links.map(item=>{
+    if(item[0].match(/http/g)){
+        return item[0];
+    }
      var n= item[0].match(/\.\.\//g);
-    // console.log(item[0])
+    //  console.log(item[0])
      temp_item=item[0].replace(/\.\.\//g,"").replace(/\.\//g,"").replace(/\/\.\.\//g,"/").replace(/\//g,"\\");
     // console.log(temp_item)
      temp_path=path.split("\\");
      res_path=""
-     res_n=0;
+     res_n=1;
+    //  console.log(temp_path);
+
      if(n) res_n+=n.length;
+    //  console.log(res_n);
      for(i=0;i<temp_path.length-res_n;i++){
         res_path+=temp_path[i]+"\\";
      }
+    
    return res_path+temp_item;//  console.log(res_path+temp_item)
 })
-
+if(res_links){
+    console.log("\x1b[32m%s\x1b[0m","Знайдено посилань: "+ res_links.length);
+    console.log(res_links);
+    }
+return res_links;
 
 
 

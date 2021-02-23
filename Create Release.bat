@@ -15,7 +15,7 @@ echo      **      **   **     **    ******  **       **  *****   *******  ******
 echo The current directory is %CD%
 set /p p="Enter project directory = " 
 :step_two
-node build.js %p%
+node modules/build.js %p%
 echo "Press:"
 echo "Any key - repeat"
 echo "n - new directory"

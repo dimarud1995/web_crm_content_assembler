@@ -77,10 +77,10 @@ function syntaxValidator(text_string,part){
   
       var t17=text_string.match(/<a[> \r\n]/g);
       var ammount_of_a_open=t17==null?0:t17.length;
-  
+
       var t18=text_string.match(/<\/a>/g);
       var ammount_of_a_close=t18==null?0:t18.length;
-
+    
       // var t19=text_string.match(/</g);
       // var ammount_of_tag_open=t17==null?0:t19.length;
   
@@ -101,6 +101,14 @@ function syntaxValidator(text_string,part){
       }
       if(ammount_of_b_open!==ammount_of_b_close){
         console.log('\x1b[31m%s\x1b[0m',"Є помилки в синтаксисі "+part+"! -->  b ");
+       // (?<=<b[^>]*>)([\s\S]*)(?=<\/b>)
+        var start=text_string.match(/<b>/g);
+        var end=text_string.match(/<\/b>/g);
+
+
+
+
+
         isValid=false;
       }
       if(ammount_of_p_open!==ammount_of_p_close){
