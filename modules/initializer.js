@@ -1,4 +1,6 @@
 const fs = require("fs");
+const path=require("path");
+
 const INDEX="index.html";
 const CSS="css\\";
 const JS="js\\";
@@ -38,14 +40,16 @@ var text_index_1 =
 <body>
 <div class="page-content-container">
     <div class="page-content">
-        
+        \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
     </div>
 </div>
 </body>
 </html>
 `
 var text_scss_1=
-`.page-content-container {
+`$main_color:#445A8B;
+
+.page-content-container {
     position: relative;
     font-family: "Lato", 'HelveticaNeueCyr', Arial, sans-serif;
     width: 100%;
@@ -70,23 +74,32 @@ var text_scss_1=
 
     }
 
+    a,
+    button,
+    div,
+    img,
+    svg {
+        -webkit-tap-highlight-color: transparent;
+    }
+
     .page-content {
         margin: auto;
         max-width: 1000px;
         position: relative;
         min-height: 650px;
+
         .my-header {
             font-style: normal;
             font-weight: 500;
             font-size: 34px;
             line-height: 140%;
             text-transform: uppercase;
-            color: #AD1380;
+            color: $main_color;
             position: relative;
             padding-left: 25px;
             margin-bottom: 40px;
 
-          
+
 
             @media screen and(max-width:1024px) {
                 margin-bottom: 20px;
@@ -96,7 +109,7 @@ var text_scss_1=
             &:before {
                 content: "";
                 width: 10px;
-                background-color: #AD1380;
+                background-color: $main_color;
                 position: absolute;
                 left: 0px;
                 bottom: 11px;
@@ -113,7 +126,8 @@ var text_scss_1=
                 font-weight: bold;
                 font-size: 26px;
                 line-height: 140%;
-                color:  #97409B;;
+                color: $main_color;
+                ;
                 margin-bottom: 40px;
 
                 @media screen and(max-width:1024px) {
@@ -125,7 +139,7 @@ var text_scss_1=
                     font-weight: bold;
                     font-size: 26px;
                     line-height: 140%;
-                    color: #97409B;
+                    color: $main_color;
                     margin-bottom: 30px;
 
 
@@ -140,7 +154,7 @@ var text_scss_1=
                 font-weight: bold;
                 font-size: 26px;
                 line-height: 140%;
-                color: #97409B;
+                color: $main_color;
                 margin-bottom: 40px;
 
                 @media screen and(max-width:1024px) {
@@ -149,6 +163,7 @@ var text_scss_1=
 
             }
         }
+
         .text {
             &18 {
                 font-style: normal;
@@ -176,16 +191,16 @@ var text_scss_1=
                 }
             }
 
-            &26 {
+            &24 {
                 font-style: normal;
-                font-weight: 300;
-                font-size: 26px;
+                font-weight: 500;
+                font-size: 24px;
                 line-height: 140%;
                 align-items: center;
                 color: #414141;
 
                 span {
-                    font-size: 26px;
+                    font-size: 24px;
 
                     @media screen and(max-width:1024px) {
                         font-size: 16px;
@@ -197,6 +212,7 @@ var text_scss_1=
                 }
             }
         }
+
         .links {
             margin-top: 40px;
             border-top: 4px solid #888;
@@ -227,8 +243,9 @@ var text_scss_1=
         }
 
 
-        
+
     }
+
     .my-row {
         display: flex;
 
@@ -403,62 +420,68 @@ var text_scss_1=
 
         }
     }
-}
+}`
 
-`
-
-function initialize(path){
-
-    if (!fs.existsSync(path+SCSS)){
-        fs.mkdirSync(path+SCSS);
+function initialize(path_to_file){
+try{
+    if (!fs.existsSync(path_to_file)){
+        fs.mkdirSync(path_to_file);
     }
-    if (!fs.existsSync(path+SCSS+"style.scss")){
-        fs.writeFile(path+SCSS+"style.scss",text_scss_1,"utf8",e=>{
-            console.log("\x1b[32m%s\x1b[0m","Створено "+path+"style.scss")
 
-        });
+    if (!fs.existsSync(path.join(path_to_file,SCSS))){
+        fs.mkdirSync(path.join(path_to_file,SCSS));
     }
-    if (!fs.existsSync(path+CSS)){
-        fs.mkdirSync(path+CSS);
-    }
-    if (!fs.existsSync(path+CSS+"style.css")){
-        fs.writeFile(path+CSS+"style.css","","utf8",e=>{
-            console.log("\x1b[32m%s\x1b[0m","Створено "+path+"style.css")
+    if (!fs.existsSync(path.join(path_to_file,SCSS,"style.scss"))){
+        fs.writeFile(path.join(path_to_file,SCSS,"style.scss"),text_scss_1,"utf8",e=>{
+            console.log("\x1b[32m%s\x1b[0m","Створено "+path_to_file+"style.scss")
 
         });
     }
-    if (!fs.existsSync(path+JS)){
-        fs.mkdirSync(path+JS);
+    if (!fs.existsSync(path.join(path_to_file,CSS))){
+        fs.mkdirSync(path.join(path_to_file,CSS));
     }
-    if (!fs.existsSync(path+JS+"script.js")){
-        fs.writeFile(path+JS+"script.js","","utf8",e=>{
-            console.log("\x1b[32m%s\x1b[0m","Створено "+path+"script.js")
+    if (!fs.existsSync(path.join(path_to_file,CSS,"style.css"))){
+        fs.writeFile(path.join(path_to_file,CSS,"style.css"),"","utf8",e=>{
+            console.log("\x1b[32m%s\x1b[0m","Створено "+path_to_file+"style.css")
+
+        });
+    }
+    if (!fs.existsSync(path.join(path_to_file,JS))){
+        fs.mkdirSync(path.join(path_to_file,JS));
+    }
+    if (!fs.existsSync(path.join(path_to_file,JS,"script.js"))){
+        fs.writeFile(path.join(path_to_file,JS,"script.js"),"","utf8",e=>{
+            console.log("\x1b[32m%s\x1b[0m","Створено "+path_to_file+"script.js")
 
         });
 
     }
-    if (!fs.existsSync(path+IMG)){
-        fs.mkdirSync(path+IMG);
+    if (!fs.existsSync(path.join(path_to_file,IMG))){
+        fs.mkdirSync(path.join(path_to_file,IMG));
     }
-    if (!fs.existsSync(path+RELEASE)){
-        fs.mkdirSync(path+RELEASE);
+    if (!fs.existsSync(path.join(path_to_file,RELEASE))){
+        fs.mkdirSync(path.join(path_to_file,RELEASE));
         
     }
 
 
 
 
-    fs.writeFile(path+"index.html", text_index_1, "utf8", (e)=>{
+    fs.writeFile(path.join(path_to_file,"index.html"), text_index_1, "utf8", (e)=>{
         if(e){
           // console.log('\x1b[31m%s\x1b[0m',"Помилка при записуванні файла!");
            console.log("Помилка: "+e);
           }else{
-            console.log("\x1b[32m%s\x1b[0m","Створено "+path+"index.html")
+            console.log("\x1b[32m%s\x1b[0m","Створено "+path_to_file+"index.html")
           }
         })
 
 
     return 1;
+}catch(e){
+    console.log(e);
+    return -1;
+    }
 }
 
 module.exports={ initialize }

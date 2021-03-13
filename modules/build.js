@@ -28,7 +28,7 @@ function main(){
 
   //console.log("res_p = "+ res_p);
 
-    var temp_index =readTextFile(res_p+INDEX);
+    var temp_index =readTextFile(path.join(res_p,INDEX));
     if(temp_index==null){
       initialize(res_p)
       return false;
@@ -90,12 +90,12 @@ function main(){
    
     
     
-    if (!fs.existsSync(res_p+RELEASE)){
-        fs.mkdirSync(res_p+RELEASE);
+    if (!fs.existsSync(path.join(res_p,RELEASE))){
+        fs.mkdirSync(path.join(res_p,RELEASE));
     }
-    copyFiles(res_p+IMG,res_p+RELEASE+IMG);
+    copyFiles(path.join(res_p,IMG),path.join(res_p,RELEASE+IMG));
 
-    fs.writeFile(res_p+RELEASE+"index.html", res_index, "utf8", (e)=>{
+    fs.writeFile(path.join(res_p,RELEASE,"index.html"), res_index, "utf8", (e)=>{
       if(e){
          console.log('\x1b[31m%s\x1b[0m',"Помилка при записуванні файла!");
          console.log("Помилка: "+e);
